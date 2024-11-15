@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>튼튼호텔 - 예약하기</title>
+    <style>
+      /* 기존 스타일 */
+      body {
+        background-color: #fff9e6;
+        font-family: Arial, sans-serif;
+        margin: 0;
+        color: #4a4a4a;
+      }
+      .reservation-container {
+        max-width: 800px;
+        margin: 40px auto;
+        padding: 20px;
+        background-color: #ffffff;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      }
+      .submit-button {
+        background-color: #f0ad4e;
+        color: white;
+        padding: 15px 20px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        display: block;
+        width: 100%;
+        text-align: center;
+      }
+      .submit-button:hover {
+        background-color: #ffbd75;
+      }
+      .room-description {
+        display: flex;
+        align-items: center;
+        margin-top: 10px;
+      }
+      .room-image {
+        width: 80px;
+        height: 80px;
+        border-radius: 5px;
+        object-fit: cover;
+        margin-right: 10px;
+      }
+      .payment-popup {
+        display: none;
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        text-align: center;
+        z-index: 1000;
+      }
+      .payment-popup button {
+        margin-top: 10px;
+        padding: 10px 20px;
+        border: none;
+        background-color: #4caf50;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reservation-container">
+      <h2>숙소 예약하기</h2>
+      <form
+        id="reservationForm"
+        action="submit_reservation.php"
+        method="POST"
+        onsubmit="return showPaymentPopup();"
+      >
+        <label>고객 이름: <input type="text" name="name" required /></label
+        ><br />
+        <label
+          >고객 전화번호:
+          <input type="text" name="guest_phone" required /></label
+        ><br />
+        <label
+          >지점 선택:
+          <select name="branch" required>
+            <option value="서울">서울</option>
+            <option value="부산">부산</option>
+            <option value="강릉">강릉</option>
+            <option value="제주">제주</option>
+          </select> </label
+        ><br />
+        <label
+          >객실 유형 선택:
+          <select id="roomType" name="room_t" required>
+            <option value="룸(스탠다드)">룸(스탠다드)</option>
+            <option value="트룸(디럭스)">트룸(디럭스)</option>
+            <option value="트트룸(프리미엄)">트트룸(프리미엄)</option>
+            <option value="튼튼룸(VIP)">튼튼룸(VIP)</option>
+          </select> </label
+        ><br />
+        <label
+          >체크인 날짜:
+          <input type="date" id="checkInDate" name="check_in" required /></label
+        ><br />
+        <label
+          >체크아웃 날짜:
+          <input
+            type="date"
+            id="checkOutDate"
+            name="check_out"
+            required /></label
+        ><br />
+        <label
+          >인원 수:
+          <input
+            type="number"
+            id="numGuests"
+            name="guests"
+            min="1"
+            required /></label
+        ><br />
+        <input type="hidden" id="totalPrice" name="total_price" value="0" />
+
+        <!-- 객실 설명 및 이미지 추가 -->
+        <div class="room-description">
+          <img class="room-image" src="standard.jpg" alt="스탠다드 룸" />
+          <span>룸 : 기본 객실로 넓고 쾌적합니다.</span>
+        </div>
+        <div class="room-description">
+          <img class="room-image" src="deluxe.jpg" alt="디럭스 룸" />
+          <span>트 룸 : 고급스러운 인테리어로 편안함을 제공합니다.</span>
+        </div>
+        <div class="room-description">
+          <img class="room-image" src="premium.jpg" alt="프리미엄 룸" />
+          <span
+            >트트 룸 : 보다 넓고 고급스러운 편의시설이 마련되어 있습니다.</span
+          >
+        </div>
+        <div class="room-description">
+          <img class="room-image" src="vip.jpg" alt="VIP 룸" />
+          <span>튼튼 룸 : 최고급 시설로 특별한 순간을 만끽하세요.</span>
+        </div>
+
+        <button type="submit" class="submit-button">예약하기</button>
+      </form>
+
+      <!-- 결제 확인 팝업 -->
+      <div class="payment-popup" id="paymentPopup">
+        <p>총 결제 금액: <span id="totalPriceDisplay">0</span>원</p>
+        <button onclick="confirmPayment()">확인</button>
+        <button onclick="closePaymentPopup()">취소</button>
+      </div>
+    </div>
+
+    <script>
+      const roomPrices = {
+        "룸(스탠다드)": 150000,
+        "트룸(디럭스)": 300000,
+        "트트룸(프리미엄)": 450000,
+        "튼튼룸(VIP)": 800000,
+      };
+
+      const additionalCharges = {
+        "룸(스탠다드)": 10000,
+        "트룸(디럭스)": 20000,
+        "트트룸(프리미엄)": 30000,
+        "튼튼룸(VIP)": 40000,
+      };
+
+      function showPaymentPopup() {
+        const roomType = document.getElementById("roomType").value;
+        const checkInDate = new Date(
+          document.getElementById("checkInDate").value
+        );
+        const checkOutDate = new Date(
+          document.getElementById("checkOutDate").value
+        );
+        const days = (checkOutDate - checkInDate) / (1000 * 60 * 60 * 24);
+        const numGuests =
+          parseInt(document.getElementById("numGuests").value) || 2;
+
+        if (days <= 0) {
+          alert("체크아웃 날짜는 체크인 날짜 이후여야 합니다.");
+          return false;
+        }
+
+        const basePrice = roomPrices[roomType] * days;
+        const extraGuests = numGuests > 2 ? numGuests - 2 : 0;
+        const extraCharge = extraGuests * additionalCharges[roomType] * days;
+        const totalPrice = basePrice + extraCharge;
+
+        document.getElementById("totalPrice").value = totalPrice;
+        document.getElementById("totalPriceDisplay").textContent =
+          totalPrice.toLocaleString();
+        document.getElementById("paymentPopup").style.display = "block";
+        return false;
+      }
+
+      function confirmPayment() {
+        document.getElementById("paymentPopup").style.display = "none";
+        document.getElementById("reservationForm").submit();
+      }
+
+      function closePaymentPopup() {
+        document.getElementById("paymentPopup").style.display = "none";
+      }
+    </script>
+  </body>
+</html>

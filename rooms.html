@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>튼튼호텔 - 객실소개</title>
+    <style>
+      /* 기본 스타일 */
+      body {
+        background-color: #fff9e6; /* 부드러운 크림색 */
+        font-family: Arial, sans-serif;
+        margin: 0;
+        color: #4a4a4a;
+      }
+
+      header {
+        background-color: #f0e68c; /* 따뜻한 노란색 */
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        font-size: 2.5em;
+        margin: 0;
+      }
+
+      nav {
+        margin: 20px 0;
+        background-color: #4caf50; /* 어두운 녹색 배경 */
+        border-radius: 5px;
+        display: inline-block; /* 가로 크기를 글자 크기만큼 맞춤 */
+      }
+
+      nav a {
+        text-decoration: none;
+        color: white;
+        padding: 5px 10px; /* 패딩은 유지 */
+        border-radius: 5px;
+        margin: 0; /* 버튼 간격 제거 */
+        display: inline-block; /* 글자 크기에 맞춰 버튼 크기 조절 */
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      nav a:hover {
+        background-color: #66bb6a; /* 밝은 녹색 hover 색상 */
+        color: #fff; /* 글자색 유지 */
+      }
+
+      main {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .room-card {
+        width: 80%;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        display: flex;
+        gap: 20px;
+      }
+
+      .room-card:hover {
+        transform: scale(1.02);
+        box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
+      }
+
+      .room-image {
+        width: 30%; /* 너비를 40%로 증가 */
+        height: 350px; /* 높이를 250px로 증가 */
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex; /* Flexbox 사용 */
+        justify-content: center; /* 수평 중앙 정렬 */
+        align-items: center; /* 수직 중앙 정렬 */
+      }
+
+      .room-image img {
+        width: 100%; /* 너비를 100%로 설정하여 부모 요소에 맞춤 */
+        height: 100%; /* 높이를 100%로 설정하여 부모 요소에 맞춤 */
+        object-fit: cover; /* 이미지 비율을 유지하면서 크기에 맞게 조절 */
+      }
+
+      .room-details {
+        flex: 1;
+      }
+
+      .room-details h2 {
+        color: #4caf50;
+        font-size: 1.8em;
+        margin: 0;
+      }
+
+      .room-details p {
+        font-size: 1.1em;
+        color: #666;
+      }
+
+      .room-options {
+        font-size: 1em;
+        color: #777;
+        margin-top: 10px;
+      }
+
+      .room-price {
+        font-size: 1.2em;
+        color: #f0ad4e; /* 살구색 */
+        font-weight: bold;
+        margin-top: 10px;
+      }
+
+      .cta-button {
+        background-color: #f0ad4e; /* 살구색 */
+        color: white;
+        padding: 10px 20px;
+        text-decoration: none;
+        border-radius: 5px;
+        font-weight: bold;
+        margin-top: 10px;
+        display: inline-block;
+        transition: background-color 0.3s;
+      }
+
+      .cta-button:hover {
+        background-color: #ffbd75; /* 버튼 hover 색상 */
+      }
+
+      footer {
+        background-color: #4a4a4a;
+        color: #fff;
+        padding: 20px;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>객실 소개</h1>
+      <nav>
+        <a href="index.html">홈으로</a>
+        <!-- 홈 버튼 -->
+      </nav>
+    </header>
+
+    <main>
+      <div class="room-card">
+        <div class="room-image">
+          <img src="room1.jpg" alt="객실 1" />
+        </div>
+        <div class="room-details">
+          <h2>룸 (스탠다드)</h2>
+          <p>
+            아늑하고 실용적인 공간으로 구성된 스탠다드 룸에서 하루의 피로를 풀고
+            편안한 휴식을 즐겨보세요. 합리적인 가격에 호텔의 기본적인 서비스를
+            누릴 수 있는 공간입니다. 비즈니스 출장 또는 여행자에게 최적의
+            선택입니다.
+          </p>
+          <div class="room-options">
+            <ul>
+              <li>무료 Wi-Fi</li>
+              <li>조식 비포함</li>
+              <li>침대: 싱글 2개</li>
+              <li>화장실: 1개</li>
+              <li>욕조: 없음</li>
+              <li>수영장: 이용 불가</li>
+            </ul>
+          </div>
+          <div class="room-price">가격: 150,000원/1박</div>
+          <a href="reservation.html" class="cta-button">예약하기</a>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-image">
+          <img src="room2.jpg" alt="객실 2" />
+        </div>
+        <div class="room-details">
+          <h2>트 룸 (디럭스)</h2>
+          <p>
+            더 넓어진 공간과 고급스러운 인테리어가 돋보이는 디럭스 룸에서 특별한
+            순간을 만들어 보세요. 슈퍼싱글 침대와 조식 서비스가 포함되어 있어
+            보다 여유로운 휴식을 제공합니다. 커플 및 가족 여행에 이상적인
+            객실입니다.
+          </p>
+          <div class="room-options">
+            <ul>
+              <li>무료 Wi-Fi</li>
+              <li>조식 포함</li>
+              <li>침대: 슈퍼싱글 2개</li>
+              <li>화장실: 1개</li>
+              <li>욕조: 있음</li>
+              <li>수영장: 이용 불가</li>
+            </ul>
+          </div>
+          <div class="room-price">가격: 300,000원/1박</div>
+          <a href="reservation.html" class="cta-button">예약하기</a>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-image">
+          <img src="room3.jpg" alt="객실 3" />
+        </div>
+        <div class="room-details">
+          <h2>트트 룸 (프리미엄)</h2>
+          <p>
+            프리미엄 룸은 한층 더 넓고 세련된 인테리어로, 편안함과 고급스러움을
+            동시에 선사합니다. 퀸 사이즈 침대와 다양한 편의시설을 갖추고 있어
+            도심 속 힐링을 원하는 고객에게 적합합니다. 여유로운 공간에서 특별한
+            시간을 보내보세요.
+          </p>
+          <div class="room-options">
+            <ul>
+              <li>무료 Wi-Fi</li>
+              <li>조식 포함</li>
+              <li>침대: 퀸 2개</li>
+              <li>화장실: 2개</li>
+              <li>욕조: 있음</li>
+              <li>수영장: 이용 가능</li>
+            </ul>
+          </div>
+          <div class="room-price">가격: 450,000원/1박</div>
+          <a href="reservation.html" class="cta-button">예약하기</a>
+        </div>
+      </div>
+
+      <div class="room-card">
+        <div class="room-image">
+          <img src="room4.jpg" alt="객실 4" />
+        </div>
+        <div class="room-details">
+          <h2>튼튼 룸 (VIP)</h2>
+          <p>
+            최상급의 서비스를 제공하는 VIP 룸에서는 최고의 휴식을 경험할 수
+            있습니다. 독립적인 공간과 개인 수영장이 구비되어 있어 프라이버시를
+            보장합니다. 중요 고객 및 특별한 날에 적합한 객실입니다.
+          </p>
+          <div class="room-options">
+            <ul>
+              <li>무료 Wi-Fi</li>
+              <li>조식 포함</li>
+              <li>침대: 킹 사이즈</li>
+              <li>화장실: 2개</li>
+              <li>욕조: 있음</li>
+              <li>수영장: 개인 이용 가능</li>
+            </ul>
+          </div>
+          <div class="room-price">가격: 800,000원/1박</div>
+          <a href="reservation.html" class="cta-button">예약하기</a>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <p>© 2024 튼튼호텔. All rights reserved.</p>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>튼튼호텔 - 로그인</title>
+    <style>
+      body {
+        background-color: #fff9e6;
+        font-family: Arial, sans-serif;
+        color: #4a4a4a;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+      }
+
+      .login-container {
+        background: #ffffff;
+        padding: 20px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+        max-width: 400px;
+        width: 100%;
+      }
+
+      .login-container h2 {
+        text-align: center;
+        color: #4caf50;
+      }
+
+      .login-container form {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+      }
+
+      .login-container input {
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .login-container button {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      .login-container button:hover {
+        background-color: #45a049;
+      }
+
+      .login-container .signup-link {
+        text-align: center;
+        margin-top: 10px;
+      }
+
+      .login-container .signup-link a {
+        color: #4caf50;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>로그인</h2>
+      <form action="login_process.php" method="post">
+        <input type="text" name="username" placeholder="아이디" required />
+        <input
+          type="password"
+          name="password"
+          placeholder="비밀번호"
+          required
+        />
+        <button type="submit">로그인</button>
+      </form>
+      <div class="signup-link">
+        <p>계정이 없으신가요? <a href="signup.html">회원가입</a></p>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>튼튼호텔 - 호텔소개</title>
+    <style>
+      /* 기본 스타일 */
+      body {
+        background-color: #fff9e6; /* 부드러운 크림색 */
+        font-family: Arial, sans-serif;
+        margin: 0;
+        color: #4a4a4a;
+      }
+
+      header {
+        background-color: #f0e68c; /* 따뜻한 노란색 */
+        padding: 20px;
+        text-align: center;
+      }
+
+      h1 {
+        color: #4caf50;
+        margin: 0;
+        font-size: 2.5em;
+      }
+
+      nav {
+        margin: 20px 0; /* 네비게이션의 상하 여백 */
+      }
+
+      nav a {
+        background-color: #4caf50; /* 버튼 배경색 */
+        color: white; /* 글자색 */
+        padding: 10px 15px; /* 여백 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        text-decoration: none; /* 밑줄 제거 */
+        margin: 0 10px; /* 링크 사이의 여백 */
+        transition: background-color 0.3s, transform 0.3s; /* 부드러운 전환 효과 */
+      }
+
+      nav a:hover {
+        background-color: #45a049; /* 마우스 오버시 색상 변화 */
+        transform: scale(1.05); /* 약간 커지게 */
+      }
+
+      .notice-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        justify-content: center;
+        align-items: center;
+      }
+
+      .notice-content {
+        background-color: #ffffff;
+        padding: 20px;
+        border-radius: 10px;
+        width: 80%;
+        max-width: 500px;
+        text-align: center;
+      }
+
+      .notice-header {
+        font-size: 1.5em;
+        color: #4caf50;
+        margin-bottom: 10px;
+      }
+
+      .notice-close {
+        background-color: #4caf50;
+        color: #fff;
+        padding: 8px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        transition: background-color 0.3s;
+      }
+
+      .notice-close:hover {
+        background-color: #45a049;
+      }
+
+      .branch-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        padding: 20px;
+      }
+
+      .branch-card {
+        background-color: #ffffff;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+        width: 300px;
+        text-align: center;
+        opacity: 0; /* 초기 상태는 보이지 않도록 설정 */
+        transform: translateY(20px); /* 약간 아래로 이동 */
+        animation: fadeIn 0.5s forwards; /* 애니메이션 추가 */
+      }
+
+      @keyframes fadeIn {
+        to {
+          opacity: 1; /* 완전히 보이게 */
+          transform: translateY(0); /* 원래 위치로 이동 */
+        }
+      }
+
+      .branch-card img {
+        width: 100%; /* 너비를 카드에 맞춤 */
+        height: 200px; /* 고정된 높이 설정 */
+        object-fit: cover; /* 이미지 비율 유지하면서 잘라내기 */
+        border-radius: 10px;
+      }
+
+      .branch-card h2 {
+        color: #4caf50;
+        margin: 15px 0;
+      }
+
+      footer {
+        background-color: #4a4a4a;
+        color: #fff;
+        padding: 40px 0;
+        text-align: center;
+      }
+
+      .footer-section {
+        margin: 20px 0;
+      }
+
+      .footer-section a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-section a:hover {
+        color: #d7bba3;
+      }
+    </style>
+    <script>
+      // 공지사항 모듈 표시 및 닫기
+      function toggleNotice() {
+        const noticeModal = document.getElementById("noticeModal");
+        noticeModal.style.display =
+          noticeModal.style.display === "flex" ? "none" : "flex";
+      }
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>튼튼호텔 - 지점 소개</h1>
+      <nav>
+        <a href="index.html">홈으로</a>
+        <a href="rooms.html">객실소개</a>
+        <a href="javascript:void(0)" onclick="toggleNotice()">공지사항</a>
+        <a href="FAQ.html">FAQ</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="branch-container">
+        <div class="branch-card">
+          <img src="branch1.jpg" alt="강남점" />
+          <h2>서울</h2>
+          <p>서울 강남에 위치한 튼튼호텔입니다. 최상의 서비스를 제공합니다.</p>
+          <p>주소: 서울특별시 강남구 강남대로 123</p>
+          <p>전화번호: 02-123-4567</p>
+        </div>
+        <div class="branch-card">
+          <img src="branch2.jpg" alt="해운대점" />
+          <h2>부산</h2>
+          <p>부산 해운대의 아름다운 바다를 감상할 수 있는 지점입니다.</p>
+          <p>주소: 부산광역시 해운대구 해운대해변로 456</p>
+          <p>전화번호: 051-234-5678</p>
+        </div>
+        <div class="branch-card">
+          <img src="branch3.jpg" alt="올레점" />
+          <h2>제주</h2>
+          <p>제주도 올레길 근처에 위치한 호텔로, 편안한 휴식을 제공합니다.</p>
+          <p>주소: 제주특별자치도 제주시 올레길 789</p>
+          <p>전화번호: 064-123-4567</p>
+        </div>
+        <div class="branch-card">
+          <img src="branch4.jpg" alt="강릉점" />
+          <h2>강원도</h2>
+          <p>
+            해수욕과 산책을 즐기기에 최적의 호텔, 바닷가를 따라 걷는 것만으로도
+            특별한 경험을 제공합니다.
+          </p>
+          <p>주소: 강원도 강릉시 해안로 1010</p>
+          <p>전화번호: 033-123-4567</p>
+        </div>
+      </div>
+    </main>
+    <div id="noticeModal" class="notice-modal">
+      <div class="notice-content">
+        <div class="notice-header">공지사항</div>
+        <p>성수기: 7월~9월, 12월~2월 - 가격 인상</p>
+        <p>비수기: 3월~6월, 10월~11월 - 할인</p>
+        <p>호텔 정기 유지보수 기간: 매월 마지막 화요일</p>
+        <p>체크인: 오후 3시 / 체크아웃: 오전 11시</p>
+        <div class="notice-close" onclick="toggleNotice()">닫기</div>
+      </div>
+    </div>
+    <footer>
+      <div class="footer-section">
+        <p>© 2024 튼튼호텔. All rights reserved.</p>
+        <p><a href="#">개인정보 처리방침</a> | <a href="#">이용약관</a></p>
+      </div>
+    </footer>
+  </body>
+</html>

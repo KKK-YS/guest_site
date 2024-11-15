@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>자주 묻는 질문 - 튼튼호텔</title>
+    <style>
+      /* 기본 스타일 */
+      body {
+        font-family: Arial, sans-serif;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f9f9f9; /* 배경 색상 */
+        color: #333; /* 기본 텍스트 색상 */
+      }
+
+      h1 {
+        color: #e6a145; /* 제목 색상 */
+        text-align: center;
+      }
+
+      /* 버튼 스타일 */
+      .button {
+        background-color: #e6a145; /* 버튼 배경 색상 */
+        color: white; /* 버튼 텍스트 색상 */
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px; /* 모서리 둥글게 */
+        cursor: pointer;
+        margin: 10px; /* 버튼 간격 */
+        display: inline-block;
+        text-decoration: none; /* 링크 밑줄 제거 */
+      }
+
+      .button:hover {
+        background-color: #d5943f; /* 호버 시 색상 */
+      }
+
+      /* 질문 스타일 */
+      .faq-question {
+        background-color: #e6a145; /* 질문 배경 색상 */
+        color: white; /* 질문 텍스트 색상 */
+        padding: 10px;
+        margin: 10px 0; /* 질문 간격 */
+        border-radius: 5px; /* 모서리 둥글게 */
+        cursor: pointer;
+        transition: background-color 0.3s; /* 배경 색상 전환 효과 */
+      }
+
+      .faq-question:hover {
+        background-color: #d5943f; /* 호버 시 색상 */
+      }
+
+      /* 답변 스타일 */
+      .faq-answer {
+        padding: 10px;
+        margin: 0 0 15px 0; /* 답변 간격 */
+        border-left: 3px solid #e6a145; /* 답변 강조 표시 */
+        display: none; /* 기본적으로 숨김 */
+        background-color: #fff; /* 답변 배경색 */
+      }
+
+      /* 페이지 내비게이션 스타일 */
+      .pagination {
+        text-align: center;
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>자주 묻는 질문</h1>
+
+    <!-- 홈으로 버튼 -->
+    <a href="index.html" class="button">홈으로</a>
+
+    <div class="faq" id="faq-container">
+      <!-- 첫 번째 페이지의 질문과 답변 -->
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 1: 호텔 체크인 시간은 언제인가요?
+      </div>
+      <div class="faq-answer">체크인 시간은 오후 3시부터입니다.</div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 2: 무료 Wi-Fi는 제공되나요?
+      </div>
+      <div class="faq-answer">네, 호텔 전역에서 무료 Wi-Fi를 제공합니다.</div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 3: 주차 공간은 어떻게 되나요?
+      </div>
+      <div class="faq-answer">
+        호텔 내부에 주차 공간이 있으며, 무료로 이용 가능합니다.
+      </div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 4: 예약 변경은 어떻게 하나요?
+      </div>
+      <div class="faq-answer">
+        예약 변경은 고객센터를 통해 가능하며, 변경 정책에 따라 수수료가 발생할
+        수 있습니다.
+      </div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 5: 반려동물 동반이 가능한가요?
+      </div>
+      <div class="faq-answer">
+        반려동물 동반은 호텔의 정책에 따라 다르며, 사전에 문의해 주시기
+        바랍니다.
+      </div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 6: 조식은 포함되어 있나요?
+      </div>
+      <div class="faq-answer">
+        네, 예약 시 조식이 포함된 패키지를 선택할 수 있습니다.
+      </div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 7: 체중 제한이 있는가요?
+      </div>
+      <div class="faq-answer">
+        체중 제한은 없습니다. 그러나 반려동물 정책을 따르셔야 합니다.
+      </div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 8: 객실 청소 시간은 어떻게 되나요?
+      </div>
+      <div class="faq-answer">
+        객실 청소는 오전 10시부터 오후 3시 사이에 진행됩니다.
+      </div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 9: 결제 수단은 어떤 것이 있나요?
+      </div>
+      <div class="faq-answer">
+        신용카드, 현금, 모바일 결제 등 다양한 결제 수단을 제공합니다.
+      </div>
+
+      <div class="faq-question" onclick="toggleAnswer(this)">
+        질문 10: 수영장 이용 시간은 언제인가요?
+      </div>
+      <div class="faq-answer">
+        수영장은 오전 7시부터 오후 10시까지 이용 가능합니다.
+      </div>
+    </div>
+
+    <div class="pagination">
+      <button class="button" id="prevPage" onclick="changePage(-1)">
+        이전
+      </button>
+      <button class="button" id="nextPage" onclick="changePage(1)">다음</button>
+    </div>
+
+    <script>
+      const questionsPerPage = 10;
+      let currentPage = 1;
+
+      const allQuestions = [
+        ["호텔 체크인 시간은 언제인가요?", "체크인 시간은 오후 3시부터입니다."],
+        [
+          "무료 Wi-Fi는 제공되나요?",
+          "네, 호텔 전역에서 무료 Wi-Fi를 제공합니다.",
+        ],
+        [
+          "주차 공간은 어떻게 되나요?",
+          "호텔 내부에 주차 공간이 있으며, 무료로 이용 가능합니다.",
+        ],
+        [
+          "예약 변경은 어떻게 하나요?",
+          "예약 변경은 고객센터를 통해 가능하며, 변경 정책에 따라 수수료가 발생할 수 있습니다.",
+        ],
+        [
+          "반려동물 동반이 가능한가요?",
+          "반려동물 동반은 호텔의 정책에 따라 다르며, 사전에 문의해 주시기 바랍니다.",
+        ],
+        [
+          "조식은 포함되어 있나요?",
+          "네, 예약 시 조식이 포함된 패키지를 선택할 수 있습니다.",
+        ],
+        [
+          "체중 제한이 있는가요?",
+          "체중 제한은 없습니다. 그러나 반려동물 정책을 따르셔야 합니다.",
+        ],
+        [
+          "객실 청소 시간은 어떻게 되나요?",
+          "객실 청소는 오전 10시부터 오후 3시 사이에 진행됩니다.",
+        ],
+        [
+          "결제 수단은 어떤 것이 있나요?",
+          "신용카드, 현금, 모바일 결제 등 다양한 결제 수단을 제공합니다.",
+        ],
+        [
+          "수영장 이용 시간은 언제인가요?",
+          "수영장은 오전 7시부터 오후 10시까지 이용 가능합니다.",
+        ],
+        ["체크아웃 시간은 언제인가요?", "체크아웃 시간은 오전 11시까지입니다."],
+        [
+          "객실 내에 미니바가 있나요?",
+          "네, 모든 객실에 미니바가 구비되어 있습니다.",
+        ],
+        [
+          "주말 요금이 어떻게 되나요?",
+          "주말 요금은 성수기와 비수기에 따라 다르며, 홈페이지에서 확인할 수 있습니다.",
+        ],
+        [
+          "레스토랑 예약은 어떻게 하나요?",
+          "호텔 레스토랑은 전화 또는 홈페이지를 통해 예약 가능합니다.",
+        ],
+        [
+          "장애인 접근이 가능한가요?",
+          "네, 모든 시설은 장애인 접근이 가능합니다.",
+        ],
+        [
+          "객실 내 안전금고가 있나요?",
+          "네, 모든 객실에 안전금고가 제공됩니다.",
+        ],
+        [
+          "호텔에서 제공하는 추가 서비스는 무엇인가요?",
+          "추가 서비스로는 세탁 서비스, 룸 서비스, 마사지 서비스 등이 있습니다.",
+        ],
+        [
+          "비즈니스 센터는 운영되나요?",
+          "네, 비즈니스 센터는 24시간 운영됩니다.",
+        ],
+        [
+          "체크인 전에 수하물을 맡길 수 있나요?",
+          "네, 체크인 전에 수하물을 무료로 맡길 수 있습니다.",
+        ],
+        [
+          "항공권 예약 서비스를 제공하나요?",
+          "아니요, 하지만 주변 여행사와 협력하여 안내해 드릴 수 있습니다.",
+        ],
+      ];
+
+      function toggleAnswer(questionElement) {
+        const answerElement = questionElement.nextElementSibling;
+        answerElement.style.display =
+          answerElement.style.display === "block" ? "none" : "block";
+      }
+
+      function displayQuestions() {
+        const faqContainer = document.getElementById("faq-container");
+        faqContainer.innerHTML = "";
+
+        const start = (currentPage - 1) * questionsPerPage;
+        const end = Math.min(start + questionsPerPage, allQuestions.length);
+
+        for (let i = start; i < end; i++) {
+          const question = allQuestions[i][0];
+          const answer = allQuestions[i][1];
+
+          const questionDiv = document.createElement("div");
+          questionDiv.classList.add("faq-question");
+          questionDiv.onclick = function () {
+            toggleAnswer(questionDiv);
+          };
+          questionDiv.textContent = `질문 ${i + 1}: ${question}`;
+
+          const answerDiv = document.createElement("div");
+          answerDiv.classList.add("faq-answer");
+          answerDiv.textContent = answer;
+
+          faqContainer.appendChild(questionDiv);
+          faqContainer.appendChild(answerDiv);
+        }
+
+        updatePagination();
+      }
+
+      function changePage(direction) {
+        currentPage += direction;
+        displayQuestions();
+      }
+
+      function updatePagination() {
+        const totalPages = Math.ceil(allQuestions.length / questionsPerPage);
+        document.getElementById("prevPage").disabled = currentPage === 1;
+        document.getElementById("nextPage").disabled =
+          currentPage === totalPages;
+      }
+
+      displayQuestions(); // 페이지 로드 시 질문 표시
+    </script>
+  </body>
+</html>

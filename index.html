@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>튼튼호텔 - 고객 사이트</title>
+    <style>
+      body,
+      html {
+        margin: 0;
+        padding: 0;
+        height: 100%;
+      }
+      /* 기본 스타일 */
+      body {
+        background-color: #fff9e6; /* 부드러운 크림색 */
+        font-family: Arial, sans-serif;
+        margin: 0;
+        color: #4a4a4a;
+      }
+
+      header {
+        position: relative;
+        overflow: hidden;
+        height: 100vh; /* 화면 전체 높이 사용 */
+      }
+
+      .banner-container {
+        position: relative;
+        width: 100%;
+        height: 100%; /* 배너 높이를 100%로 설정 */
+        overflow: hidden; /* 배너 영역을 벗어나는 이미지를 숨김 */
+      }
+
+      .banner-image {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-size: cover; /* 영역을 완전히 채우도록 설정 */
+        background-position: center; /* 이미지를 중앙에 배치 */
+        background-repeat: no-repeat; /* 반복하지 않도록 설정 */
+        opacity: 0; /* 초기 불투명도 설정 */
+        transition: opacity 0.5s ease-in-out; /* 전환 효과 설정 */
+      }
+
+      .banner-image.active {
+        opacity: 1; /* 현재 활성화된 이미지만 보임 */
+      }
+
+      .banner-text {
+        position: absolute;
+        top: 40%; /* 배너 높이에 따라 텍스트 위치 조정 */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        color: #fff;
+        text-align: center;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+      }
+
+      .banner-text h1 {
+        font-size: 3em;
+        margin: 0;
+      }
+
+      .banner-text p {
+        font-size: 1.2em;
+      }
+
+      .cta-button {
+        background-color: #f0ad4e; /* 살구색 */
+        color: white;
+        padding: 15px 30px;
+        text-decoration: none;
+        border-radius: 30px;
+        font-weight: bold;
+        margin-top: 20px;
+        transition: background-color 0.3s;
+      }
+
+      .cta-button:hover {
+        background-color: #ffbd75; /* 버튼 hover 색상 */
+      }
+
+      .navigation {
+        position: absolute;
+        top: 60%; /* 이전의 50%에서 60%로 조정 */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        display: flex;
+        justify-content: space-between;
+        width: 80%;
+      }
+
+      .nav-button {
+        background-color: rgba(255, 255, 255, 0.7);
+        border: none;
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        font-size: 1.5em;
+        transition: background-color 0.3s;
+      }
+
+      .nav-button:hover {
+        background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      nav {
+        position: absolute; /* 네비게이션을 배너 안에 위치 */
+        bottom: 20px; /* 배너의 하단 여백 설정 */
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: 1; /* 배너 이미지 위에 표시 */
+        background-color: rgba(0, 0, 0, 0.5); /* 배경 반투명 설정 */
+        padding: 10px 20px; /* 패딩 추가 */
+        border-radius: 5px; /* 모서리 둥글게 */
+      }
+
+      nav a {
+        padding: 10px 20px;
+        text-decoration: none;
+        color: #4a4a4a;
+        font-weight: bold;
+        background-color: #fff3e4;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+
+      nav a:hover {
+        background-color: #d7bba3;
+      }
+
+      .login-signup {
+        position: absolute;
+        top: 10px;
+        right: 20px;
+        display: flex;
+        gap: 10px;
+      }
+
+      .login-signup a {
+        text-decoration: none;
+        color: white;
+        font-weight: bold;
+        background-color: #7a5e49;
+        padding: 10px 20px;
+        border-radius: 5px;
+        transition: background-color 0.3s;
+      }
+
+      .login-signup a:hover {
+        background-color: #9c7b61;
+      }
+
+      main {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+      }
+
+      .event-banner {
+        width: 80%;
+        background-color: #ffedc2;
+        color: #8b4513;
+        border: 2px dashed #ffbd75;
+        padding: 20px;
+        text-align: center;
+        border-radius: 10px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        font-size: 1.5em;
+        font-weight: bold;
+        animation: pulse 2s infinite;
+        margin-bottom: 20px;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          background-color: #ffedc2;
+        }
+        50% {
+          transform: scale(1.05);
+          background-color: #ffe8b0;
+        }
+      }
+
+      .card {
+        width: 80%;
+        background-color: #ffffff;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 10px;
+      }
+
+      .card h2 {
+        color: #4caf50;
+        font-size: 2em;
+        text-align: center;
+      }
+
+      .card p {
+        font-size: 1.1em;
+        color: #666;
+        text-align: center;
+      }
+
+      footer {
+        background-color: #4a4a4a;
+        color: #fff;
+        padding: 40px 0;
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: auto;
+        display: flex;
+        align-items: flex-start;
+        padding: 0 20px;
+      }
+
+      .footer-logo {
+        margin-bottom: 20px;
+        margin-right: 40px;
+        margin-left: 0;
+      }
+
+      .footer-logo img {
+        max-width: 150px;
+      }
+
+      .footer-section {
+        flex: 1;
+        min-width: 200px;
+        margin-bottom: 20px;
+      }
+
+      .footer-section h3 {
+        margin-bottom: 15px;
+      }
+
+      .footer-section ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .footer-section ul li {
+        margin-bottom: 10px;
+      }
+
+      .footer-section ul li a {
+        color: #fff;
+        text-decoration: none;
+        transition: color 0.3s;
+      }
+
+      .footer-section ul li a:hover {
+        color: #d7bba3;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding: 20px;
+        background-color: #3a3a3a;
+        width: 100%;
+      }
+
+      .footer-bottom a {
+        color: #fff;
+        margin: 0 10px;
+        text-decoration: none;
+      }
+
+      .footer-bottom a:hover {
+        color: #d7bba3;
+      }
+      /* 모달 기본 스타일 */
+      .modal {
+        display: none; /* 기본적으로 숨김 */
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.6); /* 반투명 배경 */
+        z-index: 1000;
+        animation: fadeIn 0.3s ease; /* 등장 애니메이션 */
+      }
+
+      .modal-content {
+        background-color: #fff; /* 배경색 */
+        margin: 5% auto;
+        padding: 20px;
+        border-radius: 15px;
+        max-width: 600px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* 그림자 효과 강화 */
+        font-family: "Noto Sans KR", sans-serif;
+        animation: slideDown 0.5s ease; /* 슬라이드 다운 애니메이션 */
+        border: 1px solid #f4b400; /* 테두리 추가 */
+      }
+
+      .modal-content h2 {
+        font-size: 2em;
+        margin-bottom: 10px;
+        color: #333;
+        text-align: center;
+        border-bottom: 2px solid #f4b400; /* 제목 하단 테두리 */
+        padding-bottom: 10px;
+      }
+
+      .modal-content p {
+        font-size: 1.1em;
+        color: #555;
+        margin: 10px 0;
+        line-height: 1.5;
+      }
+
+      .modal-content p strong {
+        color: #f4b400;
+      }
+
+      .close {
+        color: #aaa;
+        float: right;
+        font-size: 1.5em;
+        cursor: pointer;
+      }
+
+      .close:hover {
+        color: #000;
+      }
+      .close:focus {
+        color: black; /* 호버할 때 색상 변화 */
+        text-decoration: none;
+        cursor: pointer; /* 포인터 커서로 변경 */
+      }
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes slideDown {
+        from {
+          transform: translateY(-20px);
+        }
+        to {
+          transform: translateY(0);
+        }
+      }
+      .welcome-popup {
+        position: fixed;
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #4a4a4a;
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        font-weight: bold;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.3);
+        z-index: 1000;
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+      .welcome-popup.show {
+        opacity: 1;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="welcome-popup" id="welcomePopup">
+      환영합니다, <span id="usernameDisplay"></span>님!
+    </div>
+    <header>
+      <div class="banner-container">
+        <div
+          class="banner-image"
+          style="background-image: url('hotel1.jpg')"
+        ></div>
+        <div
+          class="banner-image"
+          style="background-image: url('hotel2.jpg')"
+        ></div>
+        <div
+          class="banner-image"
+          style="background-image: url('hotel3.jpg')"
+        ></div>
+        <div
+          class="banner-image"
+          style="background-image: url('hotel4.jpg')"
+        ></div>
+      </div>
+      <div class="banner-text">
+        <h1>튼튼호텔에 오신 것을 환영합니다</h1>
+        <p>고객님의 완벽한 휴식을 위해 최선을 다하겠습니다.</p>
+        <a
+          href="javascript:void(0);"
+          class="cta-button"
+          onclick="checkLoginForReservation()"
+          >지금 예약하기</a
+        >
+      </div>
+      <div class="login-signup">
+        <a href="login.html">로그인</a>
+        <a href="signup.html">회원가입</a>
+      </div>
+      <div class="navigation" style="top: 60%">
+        <button class="nav-button" onclick="prevSlide()">❮</button>
+        <button class="nav-button" onclick="nextSlide()">❯</button>
+      </div>
+    </header>
+
+    <nav style="margin-top: 100px">
+      <a href="hotelsbranch.html">호텔소개</a>
+      <a href="rooms.html">객실소개</a>
+      <a href="#" onclick="toggleNoticeModal()">공지사항</a>
+      <a href="FAQ.html">FAQ</a>
+    </nav>
+
+    <main>
+      <div class="event-banner">
+        🎉 자사 홈페이지 예약 시 10% 할인! 지금 예약하고 특별한 혜택을
+        누려보세요! 🎉
+      </div>
+      <div class="card">
+        <h2>튼튼호텔의 특별한 경험</h2>
+        <p>
+          편안한 휴식과 럭셔리한 서비스를 제공하는 튼튼호텔에서 아름다운 추억을
+          만들어보세요.
+        </p>
+      </div>
+      <div id="noticeModal" class="modal">
+        <div class="modal-content">
+          <span class="close" onclick="closeNoticeModal()">&times;</span>
+          <h2>공지사항</h2>
+          <p>
+            <strong>성수기</strong>: 7월, 8월, 9월, 12월, 1월, 2월 - 성수기에는
+            객실 요금이 20% 인상됩니다.
+          </p>
+          <p>
+            <strong>비성수기</strong>: 3월, 4월, 5월, 6월, 10월, 11월 -
+            비성수기에는 특별 할인 혜택을 제공합니다.
+          </p>
+          <p>
+            <strong>호텔 유지보수 일정</strong>: 매월 마지막 화요일 - 이 날에는
+            일부 서비스가 제한될 수 있습니다.
+          </p>
+          <p>
+            <strong>체크인</strong>: 오후 3시 이후 - 객실 정비 완료 후 입실
+            가능합니다.
+          </p>
+          <p>
+            <strong>체크아웃</strong>: 오전 11시까지 - 늦은 체크아웃 시 추가
+            요금이 부과될 수 있습니다.
+          </p>
+        </div>
+      </div>
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-logo">
+          <img src="logo.png" alt="튼튼호텔 로고" />
+          <p>04533, 서울특별시 봉천동 972-5 0507-1318-9611</p>
+          <p>
+            대표 최서령 / 사업자등록번호 104-81-25980 통신판매신고번호 08708
+          </p>
+        </div>
+
+        <div class="footer-section">
+          <h3>호텔 소개</h3>
+          <ul>
+            <li><a href="#">호텔찾기</a></li>
+            <li><a href="#">기업 소개</a></li>
+            <li><a href="#">브랜드 소개</a></li>
+            <li><a href="#">지속가능경영</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-section">
+          <h3>이용안내</h3>
+          <ul>
+            <li><a href="#">고객센터</a></li>
+            <li><a href="#">예약 변경/취소</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">이용약관</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>팔로우</h3>
+          <ul>
+            <li><a href="#">페이스북</a></li>
+            <li><a href="#">인스타그램</a></li>
+            <li><a href="#">트위터</a></li>
+            <li><a href="#">유튜브</a></li>
+          </ul>
+        </div>
+        <div class="footer-section">
+          <h3>개인정보</h3>
+          <ul>
+            <li><a href="#">개인정보 처리방침</a></li>
+            <li><a href="#">이용약관</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2024 튼튼호텔. All rights reserved.</p>
+        <p><a href="#">개인정보 처리방침</a> | <a href="#">이용약관</a></p>
+      </div>
+    </footer>
+
+    <script>
+      function checkLoginForReservation() {
+        fetch("check_login.php")
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.loggedIn) {
+              // 로그인 상태면 예약 페이지로 이동
+              window.location.href = "reservation.html";
+            } else {
+              // 비로그인 상태면 로그인 안내 메시지
+              alert("예약을 위해 로그인 해주세요.");
+              window.location.href = "login.html";
+            }
+          });
+      }
+      let currentSlide = 0;
+
+      function showSlide(index) {
+        const bannerImages = document.querySelectorAll(".banner-image");
+        const totalSlides = bannerImages.length;
+
+        // 슬라이드 인덱스 조정
+        currentSlide = (index + totalSlides) % totalSlides;
+
+        // 모든 이미지를 숨기고 현재 이미지만 보이도록 설정
+        bannerImages.forEach((image, idx) => {
+          if (idx === currentSlide) {
+            image.classList.add("active"); // 현재 슬라이드 활성화
+          } else {
+            image.classList.remove("active"); // 나머지 슬라이드 비활성화
+          }
+        });
+      }
+
+      function nextSlide() {
+        showSlide(currentSlide + 1);
+      }
+
+      function prevSlide() {
+        showSlide(currentSlide - 1);
+      }
+
+      // 자동 슬라이드 (선택 사항)
+      let autoSlide = setInterval(() => {
+        nextSlide();
+      }, 8000);
+
+      // 초기 슬라이드 표시
+      showSlide(currentSlide);
+
+      function toggleNoticeModal() {
+        const modal = document.getElementById("noticeModal");
+        modal.style.display =
+          modal.style.display === "block" ? "none" : "block";
+      }
+
+      function openNoticeModal() {
+        document.getElementById("noticeModal").style.display = "block";
+      }
+
+      function closeNoticeModal() {
+        const modal = document.getElementById("noticeModal");
+        modal.style.display = "none";
+      }
+
+      // 모달 외부 클릭 시 모달 닫기
+      window.onclick = function (event) {
+        const modal = document.getElementById("noticeModal");
+        if (event.target === modal) {
+          modal.style.display = "none";
+        }
+      };
+
+      document.addEventListener("DOMContentLoaded", function () {
+        fetch("check_login.php")
+          .then((response) => response.json())
+          .then((data) => {
+            const loginContainer = document.querySelector(".login-signup");
+            if (data.loggedIn) {
+              // 로그인 상태에 따라 네비게이션 변경
+              loginContainer.innerHTML = `
+                    <a href="profile.php">회원 정보</a>
+                    <a href="reservation_check.php">예약확인</a>
+                    <a href="logout.php">로그아웃</a>
+                `;
+
+              // 환영 팝업 메시지 설정
+              const welcomePopup = document.getElementById("welcomePopup");
+              document.getElementById("usernameDisplay").textContent =
+                data.username;
+              welcomePopup.classList.add("show");
+
+              // 팝업 메시지를 3초 후에 자동으로 숨김
+              setTimeout(() => {
+                welcomePopup.classList.remove("show");
+              }, 3000);
+            } else {
+              // 비로그인 상태일 때
+              loginContainer.innerHTML = `
+                    <a href="login.html">로그인</a>
+                    <a href="signup.html">회원가입</a>
+                `;
+            }
+          });
+      });
+    </script>
+  </body>
+</html>
